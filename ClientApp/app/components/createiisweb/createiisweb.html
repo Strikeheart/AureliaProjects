@@ -6,43 +6,43 @@
             <div class="collapsible-body">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="" id="applicationpoolName" type="text">
+                        <input placeholder="qm" value.bind="appName" id="applicationpoolName" type="text">
                         <label for="applicationpoolName">Anwendungspool Name:</label>
                     </div>
                 </div>
                <div class="row">
                    <label style="margin-left: 13px;">Anwendungspool Version: </label><br />
                    <div class="col s6">
-                       <input class="with-gap" value="2.0" name="appVersion[]" type="radio" id="appVersion2" />
-                       <label for="appVersion2">2.0</label>
+                       <input class="with-gap" value="2.0" checked.bind="runTimeVersion" name="appVersion[]" change.delegate="changeRunTimeValue()" type="radio" id="appVersion2" />
+                       <label for="appVersion2">2.0 (empfohlen)</label>
                    <span style="margin-right: 10px;"></span>
-                       <input class="with-gap" value="4.0" name="appVersion[]" type="radio" id="appVersion4" />
+                       <input class="with-gap" value="4.0" checked.bind="runTimeVersion" name="appVersion[]" change.delegate="changeRunTimeValue()" type="radio" id="appVersion4" />
                        <label for="appVersion4">4.0</label>
                    </div>
                   
                </div>
-                <div class="row">
+                <div class="row"> 
                     <label style="margin-left: 13px;">Verwalteter Pipelinemodus: </label><br />
                     <div class="col s6">
-                        <input class="with-gap" value="classic" name="pipeLine[]" selected type="radio" id="pipeLineC" />
-                        <label for="pipeLineC">Klassisch</label>
+                        <input class="with-gap" value="classic"  checked.bind="pipelineMode" name="pipe[]" type="radio" id="pipeC" />
+                        <label for="pipeC">Klassisch</label>
                         <span style="margin-right: 10px;"></span>
-                        <input class="with-gap" value="integrated" name="pipeLine[]" type="radio" id="pipeLineI" />
-                        <label for="appVersion4">Integriert</label>
+                        <input class="with-gap" value="integrated"  checked.bind="pipelineMode" name="pipe[]" type="radio" id="pipeL" />
+                        <label for="pipeL">Integriert (empfohlen)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div>
                         <label style="margin-left: 13px;">32-Bit Anwendung erlauben: </label><br />
-                        <input type="checkbox" value="true" checked id="allow" />
-                        <label for="allow" style="margin-left: 17px;">Erlauben</label>
+                        <input type="checkbox" checked.bind="checked32Bit" value.one-way="checked32Bit" id="32bit" />
+                        <label for="32bit" style="margin-left: 17px;">Erlauben (empfohlen)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div>
-                        <label style="margin-left: 13px;">32-Bit Anwendung erlauben: </label><br />
-                        <input type="checkbox" value="false" checked id="allow" />
-                        <label for="allow" style="margin-left: 17px;">Deaktivieren</label>
+                        <label style="margin-left: 13px;">Schutz für schnelle Fehler: </label><br />
+                        <input type="checkbox" checked.bind="checkRapidFire" change.delegate="changeRapidFire()" value.one-way="enableRapidFailure" id="enableRapidFire" />
+                        <label for="enableRapidFire" style="margin-left: 17px;">Deaktivieren (empfohlen)</label>
                     </div>
                 </div>
                 <div class="row">
@@ -51,20 +51,50 @@
             </div>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">language</i>Schritt 1.2: Website erstellen</div>
-            <div class="collapsible-body">
-                <div id="selectSource">
-                    <input type="file" name="folderName" id="folderName" class="inputfile" webkitdirectory />
-                    <label for="folderName"><i class="fa fa-folder-open-o"></i>&nbsp; Select a Source Directory</label>
+            <div class="collapsible-header" disabled><i class="material-icons">language</i>Schritt 1.2: Website erstellen</div>
+            <div class="collapsible-body">    
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="folderName" type="text">
+                        <label for="folderName">Verzeichnisname: </label>
+                    </div>
                 </div>
-                <div class="column">
-                    <input type="text" id="sourceDirPath" class="myInput" />
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="webSiteName" type="text">
+                        <label for="webSiteName">Webseitenname: </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="hostName" type="text">
+                        <label for="hostName">URL-Adresse: </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light btn" click.trigger="sayHello()"><i class="material-icons left">save</i>Speichern</button>
                 </div>
             </div>
         </li>
         <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Schritt 1.3: Anwendungs erstellen</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-header"><i class="material-icons">linear_scale</i>Schritt 1.3: Anwendung erstellen</div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="appName" type="text">
+                        <label for="appName">Anwendungsname</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="appFolder" type="text">
+                        <label for="appFolder">Verzeichnisname:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light btn" click.trigger="sayHello()"><i class="material-icons left">save</i>Speichern</button>
+                </div>
+            </div>
         </li>
     </ul>
 </template>

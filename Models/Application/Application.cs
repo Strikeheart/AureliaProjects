@@ -9,6 +9,6 @@ namespace AureliaProjects.Models.Application
     {
         public string appName { get; set; }
         public Models.ApplicationPool.ApplicationPool appPool { get; set; }
-        public string appPath { get; set; }
+        public string appFolder { get; set; }
     }
 }

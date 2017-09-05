@@ -11,7 +11,7 @@ namespace AureliaProjects.Models.IISWeb
         public Models.ApplicationPool.ApplicationPool appPool { get; set; }
         public string webSiteName { get; set; }
         public string hostName { get; set; }
-        public string physicalPath { get; set; }
+        public string folderName { get; set; }
 
         
     }

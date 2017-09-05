@@ -10,7 +10,7 @@ namespace AureliaProjects.Models.ApplicationPool
     {
         public string applicationName { get; set; }
         public bool Enable32Bit { get; set; }
-        public ManagedPipelineMode pipelineMode { get; set; }
+        public string pipelineMode { get; set; }
         public string runTimeVersion { get; set; }
         public bool enableRapidFailure { get; set; }
         public string mode { get; set; }
