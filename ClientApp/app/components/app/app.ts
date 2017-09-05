@@ -7,26 +7,12 @@ export class App {
     configureRouter(config: RouterConfiguration, router: Router) {
         config.title = 'Aurelia';
         config.map([{
-            route: [ '', 'home' ],
-            name: 'home',
-            settings: { icon: 'home' },
-            moduleId: PLATFORM.moduleName('../home/home'),
+            route: ['', 'createiisweb'],
+            name: 'Create-IIS-Web',
+            settings: { icon: 'plus' },
+            moduleId: PLATFORM.moduleName('../createiisweb/createiisweb'),
             nav: true,
-            title: 'Home'
-        }, {
-            route: 'counter',
-            name: 'counter',
-            settings: { icon: 'education' },
-            moduleId: PLATFORM.moduleName('../counter/counter'),
-            nav: true,
-            title: 'Counter'
-        }, {
-            route: 'fetch-data',
-            name: 'fetchdata',
-            settings: { icon: 'th-list' },
-            moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),
-            nav: true,
-            title: 'Fetch data'
+            title: 'Schritt 1: Erstelle IIS Web'
         }]);
 
         this.router = router;

@@ -1,0 +1,70 @@
+﻿<template>
+    <require from="materialize-css/dist/css/materialize.css"></require>
+    <ul class="collapsible popout" data-collapsible="accordion">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">view_day</i>Schritt 1.1: Anwendungspool erstellen</div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="" id="applicationpoolName" type="text">
+                        <label for="applicationpoolName">Anwendungspool Name:</label>
+                    </div>
+                </div>
+               <div class="row">
+                   <label style="margin-left: 13px;">Anwendungspool Version: </label><br />
+                   <div class="col s6">
+                       <input class="with-gap" value="2.0" name="appVersion[]" type="radio" id="appVersion2" />
+                       <label for="appVersion2">2.0</label>
+                   <span style="margin-right: 10px;"></span>
+                       <input class="with-gap" value="4.0" name="appVersion[]" type="radio" id="appVersion4" />
+                       <label for="appVersion4">4.0</label>
+                   </div>
+                  
+               </div>
+                <div class="row">
+                    <label style="margin-left: 13px;">Verwalteter Pipelinemodus: </label><br />
+                    <div class="col s6">
+                        <input class="with-gap" value="classic" name="pipeLine[]" selected type="radio" id="pipeLineC" />
+                        <label for="pipeLineC">Klassisch</label>
+                        <span style="margin-right: 10px;"></span>
+                        <input class="with-gap" value="integrated" name="pipeLine[]" type="radio" id="pipeLineI" />
+                        <label for="appVersion4">Integriert</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label style="margin-left: 13px;">32-Bit Anwendung erlauben: </label><br />
+                        <input type="checkbox" value="true" checked id="allow" />
+                        <label for="allow" style="margin-left: 17px;">Erlauben</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <label style="margin-left: 13px;">32-Bit Anwendung erlauben: </label><br />
+                        <input type="checkbox" value="false" checked id="allow" />
+                        <label for="allow" style="margin-left: 17px;">Deaktivieren</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light btn" click.trigger="sayHello()"  ><i class="material-icons left">save</i>Speichern</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">language</i>Schritt 1.2: Website erstellen</div>
+            <div class="collapsible-body">
+                <div id="selectSource">
+                    <input type="file" name="folderName" id="folderName" class="inputfile" webkitdirectory />
+                    <label for="folderName"><i class="fa fa-folder-open-o"></i>&nbsp; Select a Source Directory</label>
+                </div>
+                <div class="column">
+                    <input type="text" id="sourceDirPath" class="myInput" />
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Schritt 1.3: Anwendungs erstellen</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        </li>
+    </ul>
+</template>
