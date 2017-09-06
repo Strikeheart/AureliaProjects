@@ -16,11 +16,10 @@ namespace AureliaProjects.Controllers
     public class CreateIISWebController : Controller
     {
         [HttpGet("[action]")]
-        public string Create(string jsonData)
+        public string CreateAppPool(string jsonData)
         {
-            Models.Application.Application app = FromJson<Models.Application.Application>(jsonData);
             Models.ApplicationPool.ApplicationPool appPool = FromJson<Models.ApplicationPool.ApplicationPool>(jsonData);
-            IISWeb webSite = FromJson<IISWeb>(jsonData);
+
             try
             {
 

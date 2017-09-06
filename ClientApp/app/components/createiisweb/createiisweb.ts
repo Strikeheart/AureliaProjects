@@ -1,5 +1,8 @@
-﻿import { HttpClient } from 'aurelia-fetch-client';
+﻿import 'whatwg-fetch';
+import { HttpClient, json } from 'aurelia-fetch-client';
 import { inject } from 'aurelia-framework';
+
+let http = new HttpClient();
 
 @inject(HttpClient)
 export class CreateIISWeb {
@@ -9,8 +12,30 @@ export class CreateIISWeb {
     public checkRapidFire: boolean;
     public runTimeVersion: string;
     public pipelineMode: string;
-    constructor() {
+    public http: HttpClient = new HttpClient();
 
+    constructor(http: any) {
+        this.http = http;
+    }
+
+    SaveStep1() {
+        let obj = {
+            applicationName : this.appName,
+            Enable32Bit: this.checked32Bit,
+            mode: this.pipelineMode,
+            runTimeVersion: this.runTimeVersion,
+            enableRapidFailure: this.enableRapidFailure 
+        };
+        console.log(obj);
+        console.log(json(obj));
+        this.http.fetch("api/CreateAppPool/Create", {
+            method: "POST",
+            body: json(obj)
+        })
+        .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
     }
 
     changeRapidFire() {
@@ -34,3 +59,4 @@ export class CreateIISWeb {
     }
 
 }
+
