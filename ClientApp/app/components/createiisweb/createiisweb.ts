@@ -32,7 +32,9 @@ export class CreateIISWeb {
             method: "POST",
             body: json(obj)
         })
-        .then(response => response.json())
+            .then(response => {
+                console.log(response);
+            })
             .then(data => {
                 console.log(data);
             })
