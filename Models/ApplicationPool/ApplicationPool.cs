@@ -15,7 +15,7 @@ namespace AureliaProjects.Models.ApplicationPool
         public bool enableRapidFailure { get; set; }
         public string mode { get; set; }
 
-        public object CreateAppPool(ApplicationPool appPool) {
+        public ResponseMessage.ResponseMessage CreateAppPool(ApplicationPool appPool) {
             try
             {
                 bool checkAppPool = CheckAppPool(appPool);
@@ -25,18 +25,29 @@ namespace AureliaProjects.Models.ApplicationPool
                     Microsoft.Web.Administration.ApplicationPool pool = serverManager.ApplicationPools.Add(appPool.applicationName);
                     pool.Enable32BitAppOnWin64 = appPool.Enable32Bit;
                     pool.ManagedPipelineMode = (appPool.mode == "integrated " ? ManagedPipelineMode.Integrated : ManagedPipelineMode.Classic);
-                    pool.ManagedRuntimeVersion = appPool.runTimeVersion;
+                    pool.ManagedRuntimeVersion = "v" + appPool.runTimeVersion;
                     pool.Failure.RapidFailProtection = appPool.enableRapidFailure;
-                    return "OK";
+                    serverManager.CommitChanges();
+                    Models.ResponseMessage.ResponseMessage rm = new ResponseMessage.ResponseMessage();
+                    rm.type = "success";
+                    rm.message = "Anwendungspool erfolgreich erstellt";
+                    return rm;
                 }
                 else
                 {
-                    return "Anwendungspool existiert bereits!";
+                    Models.ResponseMessage.ResponseMessage rm = new ResponseMessage.ResponseMessage();
+                    rm.type = "error";
+                    rm.message = "Anwendungspool existiert bereits";
+                    return rm;
                 }
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 Models.Logger.Logger.CreateLogFile(ex.ToString());
-                
+                Models.ResponseMessage.ResponseMessage rm = new ResponseMessage.ResponseMessage();
+                rm.type = "error";
+                rm.message = ex.ToString();
+                return rm;
             }
         }
         private bool CheckAppPool(ApplicationPool appPool)

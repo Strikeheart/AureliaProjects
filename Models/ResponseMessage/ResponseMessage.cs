@@ -7,6 +7,7 @@ namespace AureliaProjects.Models.ResponseMessage
 {
     public class ResponseMessage
     {
-          
+        public string type { get; set; }
+        public string message { get; set; }
     }
 }

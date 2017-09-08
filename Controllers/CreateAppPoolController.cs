@@ -16,10 +16,11 @@ namespace AureliaProjects.Controllers
         public async Task<IActionResult> Create([FromBody] Models.ApplicationPool.ApplicationPool appPool) {
             //Models.ApplicationPool.ApplicationPool appPool = FromJson<Models.ApplicationPool.ApplicationPool>(jsonData);
             string jsonAppPool = Newtonsoft.Json.JsonConvert.SerializeObject(appPool);
-            Models.Logger.Logger.CreateLogFile(jsonAppPool);
-             
+            //Models.Logger.Logger.CreateLogFile(jsonAppPool);
+
+            Models.ResponseMessage.ResponseMessage rm = appPool.CreateAppPool(appPool);
             //Models.ApplicationPool.ApplicationPool appPool = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.ApplicationPool.ApplicationPool>(jsonData);
-            return Json(appPool);
+            return Json(rm);
         }
         public string Update(string jsonData)
         {
