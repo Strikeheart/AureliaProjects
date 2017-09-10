@@ -13,7 +13,7 @@ namespace AureliaProjects.Controllers
     public class CreateAppPoolController : Controller
     {
         [HttpPost("[action]")]
-        public async Task<IActionResult> Create([FromBody] Models.ApplicationPool.ApplicationPool appPool) {
+        public IActionResult Create([FromBody] Models.ApplicationPool.ApplicationPool appPool) {
             //Models.ApplicationPool.ApplicationPool appPool = FromJson<Models.ApplicationPool.ApplicationPool>(jsonData);
             string jsonAppPool = Newtonsoft.Json.JsonConvert.SerializeObject(appPool);
             //Models.Logger.Logger.CreateLogFile(jsonAppPool);

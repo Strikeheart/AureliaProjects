@@ -6,17 +6,17 @@
             <div class="collapsible-body">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="qm" value.bind="appName" id="applicationpoolName" type="text">
+                        <input placeholder="qm" value.bind="appPool.appName" id="applicationpoolName" type="text">
                         <label for="applicationpoolName">Anwendungspool Name:</label>
                     </div>
                 </div>
                <div class="row">
                    <label style="margin-left: 13px;">Anwendungspool Version: </label><br />
                    <div class="col s6">
-                       <input class="with-gap" value="2.0" checked.bind="runTimeVersion" name="appVersion[]" change.delegate="changeRunTimeValue()" type="radio" id="appVersion2" />
+                       <input class="with-gap" value="2.0" checked.bind="appPool.runTimeVersion" name="appVersion[]" change.delegate="changeRunTimeValue()" type="radio" id="appVersion2" />
                        <label for="appVersion2">2.0 (empfohlen)</label>
                    <span style="margin-right: 10px;"></span>
-                       <input class="with-gap" value="4.0" checked.bind="runTimeVersion" name="appVersion[]" change.delegate="changeRunTimeValue()" type="radio" id="appVersion4" />
+                       <input class="with-gap" value="4.0" checked.bind="appPool.runTimeVersion" name="appVersion[]" change.delegate="changeRunTimeValue()" type="radio" id="appVersion4" />
                        <label for="appVersion4">4.0</label>
                    </div>
                   
@@ -24,24 +24,24 @@
                 <div class="row"> 
                     <label style="margin-left: 13px;">Verwalteter Pipelinemodus: </label><br />
                     <div class="col s6">
-                        <input class="with-gap" value="classic"  checked.bind="pipelineMode" name="pipe[]" type="radio" id="pipeC" />
+                        <input class="with-gap" value="classic"  checked.bind="appPool.pipelineMode" name="pipe[]" type="radio" id="pipeC" />
                         <label for="pipeC">Klassisch</label>
                         <span style="margin-right: 10px;"></span>
-                        <input class="with-gap" value="integrated"  checked.bind="pipelineMode" name="pipe[]" type="radio" id="pipeL" />
+                        <input class="with-gap" value="integrated"  checked.bind="appPool.pipelineMode" name="pipe[]" type="radio" id="pipeL" />
                         <label for="pipeL">Integriert (empfohlen)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div>
                         <label style="margin-left: 13px;">32-Bit Anwendung erlauben: </label><br />
-                        <input type="checkbox" checked.bind="checked32Bit" value.one-way="checked32Bit" id="32bit" />
+                        <input type="checkbox" checked.bind="appPool.checked32Bit" value.one-way="checked32Bit" id="32bit" />
                         <label for="32bit" style="margin-left: 17px;">Erlauben (empfohlen)</label>
                     </div>
                 </div>
                 <div class="row">
                     <div>
                         <label style="margin-left: 13px;">Schutz für schnelle Fehler: </label><br />
-                        <input type="checkbox" checked.bind="checkRapidFire" change.delegate="changeRapidFire()" value.one-way="enableRapidFailure" id="enableRapidFire" />
+                        <input type="checkbox" checked.bind="appPool.checkRapidFire" change.delegate="changeRapidFire()" value.one-way="enableRapidFailure" id="enableRapidFire" />
                         <label for="enableRapidFire" style="margin-left: 17px;">Deaktivieren (empfohlen)</label>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
             <div class="collapsible-body">    
                 <div class="row">
                     <div class="input-field col s6">
-                        <input placeholder="" id="folderName" type="text">
+                        <input placeholder="" value.bind="app.appFolder" id="folderName" type="text">
                         <label for="folderName">Verzeichnisname: </label>
                     </div>
                 </div>
@@ -72,7 +72,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="waves-effect waves-light btn" click.trigger="sayHello()"><i class="material-icons left">save</i>Speichern</button>
+                    <select multiple md-select value.two-way="selectedValues">
+                        <option value="" disabled selected>select an item</option>
+                        <option value="item1">item 1</option>
+                        <option value="item2">item 2</option>
+                        <option value="item3">item 3</option>
+                        <option value="item4">item 4</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <button class="waves-effect waves-light btn" click.trigger="SaveStep2()"><i class="material-icons left">save</i>Speichern</button>
                 </div>
             </div>
         </li>
@@ -92,7 +101,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="waves-effect waves-light btn" click.trigger="sayHello()"><i class="material-icons left">save</i>Speichern</button>
+                    <button class="waves-effect waves-light btn" click.trigger="SaveStep2()"><i class="material-icons left">save</i>Speichern</button>
                 </div>
             </div>
         </li>

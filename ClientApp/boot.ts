@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import 'jquery';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-fetch-client';
 import 'materialize-css';

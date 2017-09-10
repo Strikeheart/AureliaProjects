@@ -1,36 +1,48 @@
 ﻿import 'whatwg-fetch';
+import 'jquery';
 import { HttpClient, json } from 'aurelia-fetch-client';
 import { inject } from 'aurelia-framework';
 
 let http = new HttpClient();
 
+export interface Application {
+    appName: string;
+    appFolder: string;
+    pool: string;
+    url: string;
+}
+
+export interface ApplicationPool {
+    appName: string;
+    checked32Bit: boolean;
+    enableRapidFailure: boolean;
+    checkRapidFire: boolean;
+    runTimeVersion: string;
+    pipelineMode: string;
+}
+
 @inject(HttpClient)
 export class CreateIISWeb {
-    public appName: string;
-    public checked32Bit: boolean;
-    public enableRapidFailure: boolean;
-    public checkRapidFire: boolean;
-    public runTimeVersion: string;
-    public pipelineMode: string;
+    
     public http: HttpClient = new HttpClient();
+    public disabled: boolean = true;
+    public selectedValue: string = '';
+    public selectedValue2: string = '';
+
+    public appPool: ApplicationPool;
+    public app: Application;
 
     constructor(http: any) {
         this.http = http;
     }
 
     SaveStep1() {
-        let obj = {
-            applicationName : this.appName,
-            Enable32Bit: this.checked32Bit,
-            mode: this.pipelineMode,
-            runTimeVersion: this.runTimeVersion,
-            enableRapidFailure: this.enableRapidFailure 
-        };
-        console.log(obj);
-        console.log(json(obj));
+        
+        console.log(this.appPool);
+        console.log(json(this.appPool));
         this.http.fetch("api/CreateAppPool/Create", {
             method: "POST",
-            body: json(obj)
+            body: json(this.appPool)
         })
             .then(response => {
                 console.log(response);
@@ -41,24 +53,40 @@ export class CreateIISWeb {
     }
 
     changeRapidFire() {
-        if (this.checkRapidFire) {
-            this.enableRapidFailure = false;
+        if (this.appPool.checkRapidFire) {
+            this.appPool.enableRapidFailure = false;
         } else {
-            this.enableRapidFailure = true;
+            this.appPool.enableRapidFailure = true;
         }
     }
 
     changeRunTimeValue() {
-        if (this.runTimeVersion == "2") {
-            this.runTimeVersion = "2.0";
-        } else if (this.runTimeVersion == "4") {
-            this.runTimeVersion = "4.0"
+        if (this.appPool.runTimeVersion == "2") {
+            this.appPool.runTimeVersion = "2.0";
+        } else if (this.appPool.runTimeVersion == "4") {
+            this.appPool.runTimeVersion = "4.0"
         }
     }
 
-    sayHello() {
-        alert("Werte der Variablen: \n" + "AppName: " + this.appName + "\n" + "PipeLine: " + this.pipelineMode + "\n" + "runTimeVersion: " + this.runTimeVersion + "\n" + "32Bit:" + this.checked32Bit + "\n" + "Schnelle Fehler: " + this.enableRapidFailure);
+    LogData(obj:any) {
+        console.log(obj);
     }
 
+    SaveStep2() {
+        console.log(this.appPool);
+        console.log(json(this.appPool));
+        this.http.fetch("api/CreateAppPool/Create", {
+            method: "POST",
+            body: json(this.appPool)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
+    
+
 }
+
+
 
